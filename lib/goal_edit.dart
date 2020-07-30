@@ -71,7 +71,6 @@ class _GoalEditPageState extends State<GoalEditPage> {
       height: height,
       child:  TextField(
         controller: _todaytextController,
-        onSubmitted: _todayhandleSubmitted,
         decoration:  InputDecoration(
             filled: true,
             fillColor: HexColor("#fff7ef"),
@@ -87,7 +86,6 @@ class _GoalEditPageState extends State<GoalEditPage> {
       height: height,
       child:  TextField(
         controller: _weektextController,
-        onSubmitted: _weekhandleSubmitted,
         decoration:  InputDecoration(
             filled: true,
             fillColor: HexColor("#fff7ef"),
@@ -103,7 +101,6 @@ class _GoalEditPageState extends State<GoalEditPage> {
       height: height,
       child:  TextField(
         controller: _yeartextController,
-        onSubmitted: _yearhandleSubmitted,
         decoration:  InputDecoration(
             filled: true,
             fillColor: HexColor("#fff7ef"),
@@ -364,7 +361,7 @@ class _GoalEditPageState extends State<GoalEditPage> {
               ),
               Container(height: screenHeight*0.01),
               Container(
-                padding: EdgeInsets.all(screenWidth*0.033),
+                padding: EdgeInsets.fromLTRB(screenWidth*0.033, screenHeight*0.01, screenWidth*0.033, screenHeight*0.01),
                 width: screenWidth*0.9,
                 height: screenHeight*0.35,
                 decoration: BoxDecoration(
@@ -397,7 +394,11 @@ class _GoalEditPageState extends State<GoalEditPage> {
                         ),
                       ],
                     ),
-                    _todaybuildTextComposer(screenWidth*0.8,screenWidth*0.07),
+                    Row(
+                      children: [
+                        _todaybuildTextComposer(screenWidth*0.8,screenHeight*0.04),
+                      ],
+                    ),
                     Container(height: screenHeight*0.02,),
                     Row(
                       children: [
@@ -444,6 +445,40 @@ class _GoalEditPageState extends State<GoalEditPage> {
                       ],
                     ),
                     _yearbuildTextComposer(screenWidth*0.8,screenWidth*0.07),
+                  ],
+                ),
+              ),
+              Container(
+                width: screenWidth*0.9,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ButtonTheme(
+                      minWidth: screenWidth*0.25,
+                      height: screenHeight*0.03,
+                      child: RaisedButton(
+                        color: HexColor("#fab259"),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Text(
+                          '수정하기',
+                          style: TextStyle(
+                            fontSize: screenWidth*0.04,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () {
+                          if(_todaytextController.text != "")
+                            _todayhandleSubmitted(_todaytextController.text);
+                          if(_weektextController.text != "")
+                            _weekhandleSubmitted(_weektextController.text);
+                          if(_yeartextController.text != "")
+                            _yearhandleSubmitted(_yeartextController.text);
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
