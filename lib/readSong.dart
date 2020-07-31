@@ -426,7 +426,7 @@ class _ReadSongState extends State<ReadSong> {
                                 ),
                               ],
                             ),
-                            SizedBox(width: screenWidth*0.1),
+                            SizedBox(width: screenWidth*0.03),
                             Container(
                               child: InkWell(
                                 onTap: onPlayAudio,
@@ -446,6 +446,40 @@ class _ReadSongState extends State<ReadSong> {
                                       Container(
                                         child: Text(
                                           '녹음 듣기',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Arita-dotum-_OTF",
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: screenWidth*0.03,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(width: screenWidth*0.03,),
+                            Container(
+                              child: InkWell(
+                                onTap: stopPlayAudio,
+                                child: Container(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        width: screenWidth*0.07,
+                                        child: Image.asset('assets/stop.png'),
+                                        //color: Colors.white,
+                                      ),
+                                      Container(
+                                        height: screenWidth*0.02,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '멈추기',
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w700,
@@ -585,6 +619,7 @@ class _ReadSongState extends State<ReadSong> {
                         child: InkWell(
                           child: _wPBuildConnectItem('assets/list.png','목록'),
                           onTap: () {
+                            stopPlayAudio();
                             Navigator.pop(context);
                           },
                         ),
@@ -659,8 +694,12 @@ class _ReadSongState extends State<ReadSong> {
     );
   }
 
+  AudioPlayer audioPlayer = AudioPlayer();
   void onPlayAudio() async {
-    AudioPlayer audioPlayer = AudioPlayer();
     await audioPlayer.play(srecord, isLocal: true);
+  }
+
+  void stopPlayAudio() async {
+    await audioPlayer.stop();
   }
 }

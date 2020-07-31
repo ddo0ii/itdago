@@ -608,7 +608,7 @@ class _GoalPageState extends State<GoalPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(height: screenHeight*0.07,),
-                    _chatbuildTextComposer(screenWidth*0.8,screenHeight*0.04),
+                    _chatbuildTextComposer(screenWidth*0.75,screenHeight*0.04),
                     IconButton(
                       icon: Icon(
                         Icons.send,
